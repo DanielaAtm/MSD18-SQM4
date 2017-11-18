@@ -1,37 +1,39 @@
 package org.app.service.entities;
 
-import java.io.Serializable;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
-@Entity
-@IdClass(MembersPK.class)
+import javax.persistence.Embeddable;
+import javax.persistence.ManyToOne;
+@Embeddable
 
-public class Members implements Serializable{
-	@Id
-	private Integer employeeID;
-	@Id
-	private Integer teamID;
-	
+public class Members {
+	@ManyToOne
+	private Employees1 employeeID;
+	@ManyToOne
+	private Team teamID;
 	private String role;
-	public Integer getEmployeeID() {
-		return employeeID;
-	}
-	public void setEmployeeID(Integer employeeID) {
+	public Members(Employees1 employeeID, Team teamID, String role) {
+		super();
 		this.employeeID = employeeID;
-	}
-	public Integer getTeamID() {
-		return teamID;
-	}
-	public void setTeamID(Integer teamID) {
 		this.teamID = teamID;
+		this.role = role;
 	}
 	public String getRole() {
 		return role;
 	}
 	public void setRole(String role) {
 		this.role = role;
+	}
+	public Employees1 getEmployeeID() {
+		return employeeID;
+	}
+	public void setEmployeeID(Employees1 employeeID) {
+		this.employeeID = employeeID;
+	}
+	public Team getTeamID() {
+		return teamID;
+	}
+	public void setTeamID(Team teamID) {
+		this.teamID = teamID;
 	}
 	@Override
 	public int hashCode() {
@@ -63,15 +65,10 @@ public class Members implements Serializable{
 		return true;
 	}
 	
-	public Members(Integer employeeID, Integer teamID, String role) {
-		super();
-		this.employeeID = employeeID;
-		this.teamID = teamID;
-		this.role = role;
-	}
 	public Members() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
 	
 }

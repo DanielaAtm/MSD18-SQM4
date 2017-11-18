@@ -1,14 +1,23 @@
 package org.app.service.entities;
 
+import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.CascadeType.PERSIST;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Team {
 @Id @GeneratedValue
 	private Integer teamID;
 	private String teamName;
+	@OneToMany(mappedBy="team", cascade = { ALL, PERSIST })
+	private List<Employees1> Employees1List=new ArrayList<Employees1>();
 	public Integer getTeamID() {
 		return teamID;
 	}

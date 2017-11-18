@@ -12,7 +12,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.app.patterns.EntityRepository;
 import org.app.patterns.EntityRepositoryBase;
-import org.app.service.entities.Team;
+import org.app.service.entities.EntityBase;
 
 /**
  * Session Bean implementation class ScrumTeamRepositoryService
@@ -22,7 +22,7 @@ import org.app.service.entities.Team;
 // 1. Remote interface
 @Stateless
 @LocalBean
-public class DataServiceEJB extends EntityRepositoryBase<Team> implements DataService{
+public class DataServiceEJB extends EntityRepositoryBase<EntityBase> implements DataService{
 	private static Logger logger = Logger.getLogger(DataServiceEJB.class.getName());
 	
 	// 2. Inject resource 
@@ -30,7 +30,7 @@ public class DataServiceEJB extends EntityRepositoryBase<Team> implements DataSe
 //	private EntityManager em;
 
     // 3. Init with injected EntityManager
-	private EntityRepository<Team> entityRepository;
+	private EntityRepository<EntityBase> entityRepository;
 	
     @PostConstruct
 	public void init(){

@@ -1,8 +1,16 @@
 package org.app.service.entities;
 
+import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.CascadeType.PERSIST;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Employees1 {
@@ -13,7 +21,30 @@ public class Employees1 {
 	private String employeeName;
 	private String employeeEmail;
 	private String designation;
-	private Integer projectID2;
+	@ManyToOne
+	private Team team;
+	@ManyToOne
+	private Project project;
+	@OneToMany(mappedBy="assignerID", cascade = { ALL, PERSIST })
+	private List<Bug> BugList=new ArrayList<Bug>();
+	
+	public Employees1(Integer employeeID, String employeeName, String employeeEmail, String designation, Team team,
+			Project project, List<Bug> bugList) {
+		super();
+		this.employeeID = employeeID;
+		this.employeeName = employeeName;
+		this.employeeEmail = employeeEmail;
+		this.designation = designation;
+		this.team = team;
+		this.project = project;
+		BugList = bugList;
+	}
+	public Team getTeam() {
+		return team;
+	}
+	public void setTeam(Team team) {
+		this.team = team;
+	}
 	public Integer getEmployeeID() {
 		return employeeID;
 	}
@@ -38,11 +69,17 @@ public class Employees1 {
 	public void setDesignation(String designation) {
 		this.designation = designation;
 	}
-	public Integer getProjectID() {
-		return projectID2;
+	public Project getProject() {
+		return project;
 	}
-	public void setProjectID(Integer projectID) {
-		this.projectID2 = projectID;
+	public void setProject(Project project) {
+		this.project = project;
+	}
+	public List<Bug> getBugList() {
+		return BugList;
+	}
+	public void setBugList(List<Bug> bugList) {
+		BugList = bugList;
 	}
 	@Override
 	public int hashCode() {
@@ -67,17 +104,10 @@ public class Employees1 {
 			return false;
 		return true;
 	}
-	public Employees1(Integer employeeID, String employeeName, String employeeEmail, String designation,
-			Integer projectID) {
-		super();
-		this.employeeID = employeeID;
-		this.employeeName = employeeName;
-		this.employeeEmail = employeeEmail;
-		this.designation = designation;
-		this.projectID2 = projectID;
-	}
+	
 	public Employees1() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
 }

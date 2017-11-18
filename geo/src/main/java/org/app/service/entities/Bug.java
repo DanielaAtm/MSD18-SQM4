@@ -17,14 +17,20 @@ public class Bug {
 	private String bugTitle;
 	@ManyToOne
 	private Project projectID;
-	private Integer assignerID;
+	@ManyToOne
+	private Employees1 assignerID;
 	@Temporal(TemporalType.DATE)
 	private Date createdDate ;
 	@Temporal(TemporalType.DATE)
 	private Date updatedDate;
 	@Temporal(TemporalType.DATE)
 	private Date dueDate;
-	private Integer status;
+	@ManyToOne
+	private BugStatus status;
+	@ManyToOne
+	private BugType type;
+	@ManyToOne
+	private Feature feature;
 	public Integer getBugID() {
 		return bugID;
 	}
@@ -49,10 +55,10 @@ public class Bug {
 	public void setProjectID(Project projectID) {
 		this.projectID = projectID;
 	}
-	public Integer getAssignerID() {
+	public Employees1 getAssignerID() {
 		return assignerID;
 	}
-	public void setAssignerID(Integer assignerID) {
+	public void setAssignerID(Employees1 assignerID) {
 		this.assignerID = assignerID;
 	}
 	public Date getCreatedDate() {
@@ -73,17 +79,29 @@ public class Bug {
 	public void setDueDate(Date dueDate) {
 		this.dueDate = dueDate;
 	}
-	public Integer getStatus() {
+	public BugStatus getStatus() {
 		return status;
 	}
-	public void setStatus(Integer status) {
+	public void setStatus(BugStatus status) {
 		this.status = status;
+	}
+	public BugType getType() {
+		return type;
+	}
+	public void setType(BugType type) {
+		this.type = type;
+	}
+	public Feature getFeature() {
+		return feature;
+	}
+	public void setFeature(Feature feature) {
+		this.feature = feature;
 	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((assignerID == null) ? 0 : assignerID.hashCode());
+		result = prime * result + ((bugID == null) ? 0 : bugID.hashCode());
 		return result;
 	}
 	@Override
@@ -95,15 +113,15 @@ public class Bug {
 		if (getClass() != obj.getClass())
 			return false;
 		Bug other = (Bug) obj;
-		if (assignerID == null) {
-			if (other.assignerID != null)
+		if (bugID == null) {
+			if (other.bugID != null)
 				return false;
-		} else if (!assignerID.equals(other.assignerID))
+		} else if (!bugID.equals(other.bugID))
 			return false;
 		return true;
 	}
-	public Bug(Integer bugID, String bugDescription, String bugTitle, Project projectID, Integer assignerID,
-			Date createdDate, Date updatedDate, Date dueDate, Integer status) {
+	public Bug(Integer bugID, String bugDescription, String bugTitle, Project projectID, Employees1 assignerID,
+			Date createdDate, Date updatedDate, Date dueDate, BugStatus status, BugType type, Feature feature) {
 		super();
 		this.bugID = bugID;
 		this.bugDescription = bugDescription;
@@ -114,6 +132,8 @@ public class Bug {
 		this.updatedDate = updatedDate;
 		this.dueDate = dueDate;
 		this.status = status;
+		this.type = type;
+		this.feature = feature;
 	}
 	public Bug() {
 		super();

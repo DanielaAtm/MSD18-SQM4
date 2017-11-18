@@ -1,0 +1,14 @@
+org\app\service\entities\Bug.class
+org\app\service\rest\ApplicationConfig.class
+org\app\patterns\EntityRepository.class
+org\app\service\entities\BugType.class
+org\app\service\entities\BugStatus.class
+org\app\service\ejb\DataService.class
+org\app\service\ejb\DataServiceEJB.class
+org\app\service\entities\EntityBase.class
+org\app\service\entities\Team.class
+org\app\service\entities\Project.class
+org\app\service\entities\Feature.class
+org\app\service\entities\Members.class
+org\app\patterns\EntityRepositoryBase.class
+org\app\service\entities\Employees1.class

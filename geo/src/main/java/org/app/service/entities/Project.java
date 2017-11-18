@@ -21,6 +21,8 @@ public class Project {
 	private Date startDate;
 	@OneToMany(mappedBy="projectID", cascade = { ALL, PERSIST })
 	private List<Bug> BugList=new ArrayList<Bug>();
+	@OneToMany(mappedBy="project", cascade = { ALL, PERSIST })
+	private List<Employees1> Employees1List=new ArrayList<Employees1>();
 	public Integer getProjectID() {
 		return projectID;
 	}

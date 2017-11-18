@@ -6,7 +6,7 @@ import javax.ws.rs.core.Response;
 
 import org.app.patterns.EntityRepository;
 import org.app.service.ejb.DataService;
-import org.app.service.entities.Team;
+import org.app.service.entities.EntityBase;
 import org.app.service.rest.ApplicationConfig;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -33,7 +33,7 @@ import javax.ws.rs.core.Response;
 @RunWith(Arquillian.class)
 public class TestDataServiceRestArq {
 	private static Logger logger = Logger.getLogger(TestDataServiceRestArq.class.getName());
-	private static String serviceURL = "http://localhost:8080/geo/rest/service";
+	private static String serviceURL = "http://localhost:8089/geo/rest/service";
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -45,7 +45,7 @@ public class TestDataServiceRestArq {
 	                .create(WebArchive.class, "msd-test.war")
 	                .addPackage(EntityRepository.class.getPackage())
 	                .addPackage(DataService.class.getPackage())
-	                .addPackage(Team.class.getPackage())
+	                .addPackage(EntityBase.class.getPackage())
 	                .addPackage(ApplicationConfig.class.getPackage())
 	                .addAsResource("META-INF/persistence.xml")
 	                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");

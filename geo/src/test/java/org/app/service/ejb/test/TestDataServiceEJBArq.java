@@ -7,7 +7,7 @@ import javax.ejb.EJB;
 import org.app.patterns.EntityRepository;
 import org.app.service.ejb.DataService;
 import org.app.service.ejb.DataServiceEJB;
-import org.app.service.entities.Team;
+import org.app.service.entities.EntityBase;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.Archive;
@@ -38,7 +38,7 @@ public class TestDataServiceEJBArq {
 	                .create(WebArchive.class, "msd-test.war")
 	                .addPackage(EntityRepository.class.getPackage())
 	                .addPackage(DataService.class.getPackage())
-	                .addPackage(Team.class.getPackage())
+	                .addPackage(EntityBase.class.getPackage())
 	                .addAsResource("META-INF/persistence.xml")
 	                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
 	   }
