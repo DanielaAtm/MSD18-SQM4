@@ -3,6 +3,7 @@ package org.app.service.entities;
 import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.CascadeType.PERSIST;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+@SuppressWarnings("serial")
 @Entity
-public class Employees1 {
+public class Employees1 implements Serializable{
 
 	@Id @GeneratedValue
 	private Integer employeeID;
@@ -28,6 +30,14 @@ public class Employees1 {
 	@OneToMany(mappedBy="assignerID", cascade = { ALL, PERSIST })
 	private List<Bug> BugList=new ArrayList<Bug>();
 	
+	public Employees1(Integer employeeID, String employeeName, String employeeEmail, String designation, Team team) {
+		super();
+		this.employeeID = employeeID;
+		this.employeeName = employeeName;
+		this.employeeEmail = employeeEmail;
+		this.designation = designation;
+		this.team = team;
+	}
 	public Employees1(Integer employeeID, String employeeName, String employeeEmail, String designation, Team team,
 			Project project, List<Bug> bugList) {
 		super();

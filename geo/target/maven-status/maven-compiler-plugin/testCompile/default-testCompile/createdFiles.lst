@@ -1,3 +1,5 @@
-org\app\service\rest\test\TestDataServiceRest.class
 org\app\service\rest\test\TestDataServiceRestArq.class
+org\app\service\ejb\test\TestBugStatusDataServiceEJBArq.class
 org\app\service\ejb\test\TestDataServiceEJBArq.class
+org\app\service\rest\test\TestDataServiceRest.class
+org\app\service\ejb\test\TestBugDataServiceEJBArq.class

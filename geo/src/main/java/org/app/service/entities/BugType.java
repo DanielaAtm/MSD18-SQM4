@@ -1,11 +1,15 @@
 package org.app.service.entities;
 
+
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+@SuppressWarnings("serial")
 @Entity
-public class BugType {
+public class BugType implements Serializable {
 
 	@Id @GeneratedValue
 	private Integer bugTypeId;

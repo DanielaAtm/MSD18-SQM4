@@ -1,5 +1,6 @@
 package org.app.service.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -9,8 +10,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+@SuppressWarnings("serial")
 @Entity
-public class Bug {
+public class Bug implements Serializable{
 	@Id @GeneratedValue
 	private Integer bugID;
 	private String bugDescription;
@@ -135,6 +137,7 @@ public class Bug {
 		this.type = type;
 		this.feature = feature;
 	}
+	
 	public Bug() {
 		super();
 		// TODO Auto-generated constructor stub
