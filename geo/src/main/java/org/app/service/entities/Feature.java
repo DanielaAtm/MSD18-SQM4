@@ -3,6 +3,7 @@ package org.app.service.entities;
 import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.CascadeType.PERSIST;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,8 +12,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+@SuppressWarnings("serial")
 @Entity
-public class Feature {
+public class Feature implements Serializable {
 	@Id  @GeneratedValue
 	private Integer featureID;
 	private String featureName;

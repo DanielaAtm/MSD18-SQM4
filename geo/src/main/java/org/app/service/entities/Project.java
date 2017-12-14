@@ -1,5 +1,6 @@
 package org.app.service.entities;
 
+import java.io.Serializable;
 import java.util.*;
 
 import javax.persistence.Entity;
@@ -11,8 +12,9 @@ import javax.persistence.TemporalType;
 import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.CascadeType.PERSIST;
 
+@SuppressWarnings("serial")
 @Entity
-public class Project {
+public class Project implements Serializable{
 
 	@Id @GeneratedValue
 	private Integer projectID;

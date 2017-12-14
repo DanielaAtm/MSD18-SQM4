@@ -2,10 +2,8 @@ package org.app.service.ejb.test;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.logging.Logger;
 
 import javax.ejb.EJB;
