@@ -47,41 +47,39 @@ private static Logger logger = Logger.getLogger(TestEmployees1DataServiceEJBArq.
 	
 	@Test
 	public void test1_GetMessage() {
-		logger.info("DEBUG: Junit TESTING: testGetMessage ...");
+		logger.info("DEBUG: Junit TESTING: getMessage ...");
 		String response = service.getMessage();
 		assertNotNull("Data Service failed!", response);
 		logger.info("DEBUG: EJB Response ..." + response);
 	}
-
+	
 	@Test
-	public void test4_GetEmployees1() {
-		logger.info("DEBUG: Junit TESTING: testGetEmployees1 ...");
-		Collection<Employees1> employees = service.toCollection();
-		assertTrue("Fail to read Employees!", employees.size() > 0);
+	public void test4_GetEmployees() {
+		logger.info("DEBUG: Junit TESTING: testGetProjects ...");
+		Collection<Employees1> Employees = service.toCollection();
+		assertTrue("Fail to read Employees!", Employees.size() > 0);
 	}
-
 	@Test
 	public void test3_AddEmployee() {
 		logger.info("DEBUG: Junit TESTING: testAddEmployee ...");
 		
 		Integer employeeToAdd = 3;
-		for (int i=1; i <= employeeToAdd; i++)
-		{
-			service.add(new Employees1(i, "Employee_" + (100 + i), null,null,null));
+		for (int i=1; i <= employeeToAdd; i++){
+			service.add(new Employees1(i, "Employee_" + (100 + i)));
 		}
-		Collection<Employees1> employees = service.toCollection();
-		assertTrue("Fail to add Employee!", employees.size() == employeeToAdd);
+		Collection<Employees1> Employees = service.toCollection();
+		assertTrue("Fail to add Employees!", Employees.size() == employeeToAdd);
 	}
-
+	
 	@Test
 	public void test2_DeleteEmployee() {
 		logger.info("DEBUG: Junit TESTING: testDeleteEmployee ...");
 		
-		Collection<Employees1> employees1 = service.toCollection();
-		for (Employees1 e: employees1)
+		Collection<Employees1> Employees = service.toCollection();
+		for (Employees1 e: Employees)
 			service.remove(e);
 		Collection<Employees1> EmployeesAfterDelete = service.toCollection();
-		assertTrue("Fail to read Projects!", EmployeesAfterDelete.size() == 0);
-	}		
+		assertTrue("Fail to read Employees!", EmployeesAfterDelete.size() == 0);
+	}	
 
 }

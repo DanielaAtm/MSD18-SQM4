@@ -12,7 +12,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+@XmlRootElement(name="employee") 
+@XmlAccessorType(XmlAccessType.NONE)
 @SuppressWarnings("serial")
 @Entity
 public class Employees1 implements Serializable{
@@ -49,48 +54,64 @@ public class Employees1 implements Serializable{
 		this.project = project;
 		BugList = bugList;
 	}
+	@XmlElement
 	public Team getTeam() {
 		return team;
 	}
 	public void setTeam(Team team) {
 		this.team = team;
 	}
+	@XmlElement
 	public Integer getEmployeeID() {
 		return employeeID;
 	}
 	public void setEmployeeID(Integer employeeID) {
 		this.employeeID = employeeID;
 	}
+	@XmlElement
 	public String getEmployeeName() {
 		return employeeName;
 	}
 	public void setEmployeeName(String employeeName) {
 		this.employeeName = employeeName;
 	}
+	@XmlElement
 	public String getEmployeeEmail() {
 		return employeeEmail;
 	}
 	public void setEmployeeEmail(String employeeEmail) {
 		this.employeeEmail = employeeEmail;
 	}
+	@XmlElement
 	public String getDesignation() {
 		return designation;
 	}
 	public void setDesignation(String designation) {
 		this.designation = designation;
 	}
+	//@XmlElement
 	public Project getProject() {
 		return project;
 	}
 	public void setProject(Project project) {
 		this.project = project;
 	}
+	//@XmlElement
 	public List<Bug> getBugList() {
 		return BugList;
 	}
 	public void setBugList(List<Bug> bugList) {
 		BugList = bugList;
 	}
+	/* Rest Resource URL*/
+	public static String BASE_URL = "http://localhost:8089/geo/rest/employees/";
+	@XmlElement(name = "link")
+    public AtomLink getLink() throws Exception {
+		String restUrl = BASE_URL + this.getEmployeeID();
+        return new AtomLink(restUrl, "get-employee");
+    }	
+	
+	public void setLink(AtomLink link){}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -118,6 +139,11 @@ public class Employees1 implements Serializable{
 	public Employees1() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+	public Employees1(Integer employeeID, String employeeName) {
+		// TODO Auto-generated constructor stub
+		this.employeeID = employeeID;
+		this.employeeName = employeeName;
 	}
 	
 }

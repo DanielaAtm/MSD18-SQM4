@@ -8,6 +8,8 @@ import java.util.logging.Logger;
 
 import javax.ejb.EJB;
 
+import org.app.patterns.EntityRepository;
+import org.app.patterns.EntityRepositoryBase;
 import org.app.service.ejb.BugDataService;
 import org.app.service.ejb.BugDataServiceEJB;
 import org.app.service.entities.Bug;
@@ -32,17 +34,18 @@ public class TestBugDataServiceEJBArq {
 	// EJB DataService Ref
 	private static BugDataService service;
 	
-	@Deployment 
-	// Arquilian infrastructure
-	public static Archive<?> createDeployment(){
-		return ShrinkWrap.create(WebArchive.class,"msd-test.war")
-						.addPackage(Bug.class.getPackage())
-						.addClass(BugDataService.class)
-						.addClass(BugDataServiceEJB.class)
-						.addAsResource("META-INF/persistence.xml")
-						.addAsManifestResource(EmptyAsset.INSTANCE,"beans.xml");
-	}
-	
+	@Deployment // Arquilian infrastructure
+	public static Archive<?> createDeployment() {
+	        return ShrinkWrap
+	                .create(WebArchive.class, "msd-test.war")
+	                .addPackage(Bug.class.getPackage())
+	                .addClass(BugDataService.class)
+	                .addClass(BugDataServiceEJB.class)
+	                .addClass(EntityRepository.class)
+	                .addClass(EntityRepositoryBase.class)
+	                .addAsResource("META-INF/persistence.xml")
+	                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+	}	
 	@Test
 	public void test1_GetMessage() {
 		logger.info("DEBUG: Junit TESTING: getMessage ...");
@@ -54,31 +57,29 @@ public class TestBugDataServiceEJBArq {
 	@Test
 	public void test4_GetBugs() {
 		logger.info("DEBUG: Junit TESTING: testGetBugs ...");
-		
-		Collection<Bug> bugs = service.getBugs();
+		Collection<Bug> bugs = service.toCollection();
 		assertTrue("Fail to read bugs!", bugs.size() > 0);
 	}
 	@Test
 	public void test3_AddBug() {
-		logger.info("DEBUG: Junit TESTING: testAddBug ...");
-
+		logger.info("DEBUG: Junit TESTING: testAddBug...");
+		
 		Integer bugToAdd = 3;
 		for (int i=1; i <= bugToAdd; i++){
-			//service.addBug(new Bug(100 + i, "Bug_" + (100 + i)));
-			service.addBug(new Bug(null,null, "Bug_" + (100 + i),null,null,null,null,null,null,null,null ));
+			service.add(new Bug(i,null, "Bug_" + (100 + i),null,null,null,null,null,null,null,null));
 		}
-		Collection<Bug> bugs = service.getBugs();
-		assertTrue("Fail to add bugs!", bugs.size() == bugToAdd);
+		Collection<Bug> bugs = service.toCollection();
+		assertTrue("Fail to add Employees!", bugs.size() == bugToAdd);
 	}
 	
 	@Test
 	public void test2_DeleteBug() {
 		logger.info("DEBUG: Junit TESTING: testDeleteBug ...");
 		
-		Collection<Bug> bugs = service.getBugs();
+		Collection<Bug> bugs = service.toCollection();
 		for (Bug b: bugs)
-			service.removeBug(b);
-		Collection<Bug> bugsAfterDelete = service.getBugs();
+			service.remove(b);
+		Collection<Bug> bugsAfterDelete = service.toCollection();
 		assertTrue("Fail to read bugs!", bugsAfterDelete.size() == 0);
 	}	
 }
